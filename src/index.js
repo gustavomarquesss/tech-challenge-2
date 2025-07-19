@@ -1,39 +1,25 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const postRoutes = require("./routes/posts");
+const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
-app.use(express.json())
 const port = 3000;
 
 app.use(express.json());
+app.use("/posts", postRoutes);
 
-const Blog = mongoose.model("Blog", {
-    title: String,
-    content: String,
-    createdAt: Date,
-    updatedAt: Date,
+app.get("/", (req, res) => {
+    res.send("API Blogging - Tech Challenge 🚀");
 });
 
-app.get("/", async(req, res) => {
-    const blogs = await Blog.find()
-    res.send(blogs);
-});
+app.use(errorHandler);
 
-app.post("/", async(req, res) => {
-    const blog = new Blog({
-        title: req.body.title,
-        content: req.body.content,
-        createdAt: req.body.createdAt,
-        updatedAt: req.body.updatedAt,
-    });
-
-    await blog.save();
-    res.send(blog);
-});
-
-app.listen(port, () => {
-    mongoose.connect(
-        "mongodb+srv://techchallenge:MXjPGiPwDto4oLum@tech-challenge-2.ycsoxeu.mongodb.net/?retryWrites=true&w=majority&appName=tech-challenge-2"
-    );
-    console.log("App running");
+mongoose.connect(
+    "mongodb+srv://techchallenge:MXjPGiPwDto4oLum@tech-challenge-2.ycsoxeu.mongodb.net/?retryWrites=true&w=majority&appName=tech-challenge-2"
+).then(() => {
+    console.log("MongoDB conectado com sucesso.");
+    app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));
+}).catch((err) => {
+    console.error("Erro ao conectar no MongoDB", err);
 });
