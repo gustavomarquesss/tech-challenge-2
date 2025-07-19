@@ -1,15 +1,22 @@
 {
-  "name": "tech-challenge-2",
-  "version": "1.0.0",
-  "description": "tech challenge api desenvolvida em nodejs com mongodb",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Gustavo",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^5.1.0",
-    "mongoose": "^8.16.4"
-  }
+    "name": "tech-challenge-blog-api",
+    "version": "1.0.0",
+    "description": "API de blogging para docentes e discentes",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js",
+        "test": "jest --coverage"
+    },
+    "author": "Gustavo, João, Belmonte, Matheus e Thomaz",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2",
+        "mongoose": "^7.6.1"
+    },
+    "devDependencies": {
+        "jest": "^29.6.4",
+        "supertest": "^6.3.3",
+        "nodemon": "^3.0.1"
+    }
 }
